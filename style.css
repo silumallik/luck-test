@@ -1,0 +1,207 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+}
+
+/* TOP BAR */
+.top-bar {
+    width: 95%;
+    margin: 10px auto;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+/* MAIN CONTAINER */
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+/* CARD */
+.card {
+    width: 250px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+}
+
+/* INPUT */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 25px;
+    border: none;
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00c6ff;
+}
+
+/* NUMBER BOX (MAIN HERO) */
+.numberbox {
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    color: #00eaff;
+    text-shadow: 0 0 25px #00eaff;
+}
+
+/* RESULT BOARD */
+.result-box {
+    width: 680px;
+    font-size: larger;
+    /* max-height: 400px; */
+    height: 50vh;
+    overflow: scroll;
+    /* overflow-y: auto; */
+    border-radius: 15px;
+    background: rgba(255,255,255,0.05);
+}
+
+.result-box::-webkit-scrollbar {
+    display: none;
+}
+
+.result-box h5 {
+    font-family: monospace;
+    font-size: x-large;
+    text-align: center;
+    background-color: teal;
+    height: 8vh;
+    display: block;
+    border-radius: 1vh;
+    align-content: center;
+    position: sticky;
+    top: 0;
+}
+
+.result-box p {
+    padding: 8px;
+    border-radius: 8px;
+    margin: 5px;
+    color: #00ff99;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* USER CARDS */
+.userboards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* RESULT CARD */
+.result-card {
+    width: 220px;
+    padding: 15px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.08);
+    text-align: center;
+    transition: 0.3s;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.grid div {
+    padding: 10px;
+    border-radius: 8px;
+    background: #2c5364;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.grid div:hover {
+    background: #00c6ff;
+}
+
+/* SELECTED NUMBER */
+.grid div.active {
+    background: #00eaff;
+    color: black;
+    transform: scale(1.1);
+}
+
+/* WIN UI */
+.win {
+    border: 2px solid #00ff99;
+    box-shadow: 0 0 20px #00ff99;
+}
+
+/* LOSE UI */
+.lose {
+    border: 2px solid red;
+    box-shadow: 0 0 10px red;
+    opacity: 7;
+}
+
+/* BUTTON GROUP */
+#feature-btn {
+    width: 60%;
+    margin: 20px auto;
+    display: flex;
+    gap: 10px;
+}
+
+/* DESCRIPTION */
+#gamedescription {
+    width: 90%;
+    margin: 20px auto;
+}
+
+#gamedescription p {
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
