@@ -302,7 +302,7 @@ createuser.addEventListener("click", () => {
 
 // PLAY BUTTON — adds/updates MULTIPLE users replase kiya hey Update Number mey
 document.querySelector("#updatenumber").addEventListener("click", () => {
-    alert(`Selected Number Of All Users Has Been Updated.`)
+    
     let allCards = document.querySelectorAll(".result-card");
 
 
