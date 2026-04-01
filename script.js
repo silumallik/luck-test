@@ -424,18 +424,20 @@ function addToResultBoard(randomNumber, players) {
 
     let lines = []; // Store lines for stagger animation
 
+    let count = 1;
+
     players.forEach(p => {
         let line = document.createElement("p");
 
         if (p.number === randomNumber) {
             line.textContent =
-                `✅ ${p.name} WON ${Number(p.balance) * 4} Rs.`;
+                `${count})  ✅ ${p.name} WON ${Number(p.balance) * 4} Rs.`;
             line.style.color = "white"
             line.style.opacity = ".8"
             line.style.fontWeight = "bold"
         } else {
             line.textContent =
-                `❌ ${p.name} LOST ${p.balance} Rs.`;
+                `${count})  ❌ ${p.name} LOST ${p.balance} Rs.`;
             line.style.color = "red"
         }
 
@@ -443,6 +445,7 @@ function addToResultBoard(randomNumber, players) {
         lines.push(line); // collect elements
 
         numberanimation()
+        count++;
 
     });
     board.append(h5)
