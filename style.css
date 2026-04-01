@@ -71,7 +71,7 @@ button {
     width: 100%;
     padding: 12px;
     margin-top: 10px;
-    border-radius: 25px;
+    border-radius: 10px;
     border: none;
     background: linear-gradient(45deg, #00c6ff, #0072ff);
     color: white;
@@ -219,4 +219,13 @@ button:hover {
     .result-box {
         height: 40vh; 
     }
+}
+
+@media (max-width: 1025px) {
+    .result-box {
+        height: 50vh;
+    }
+    .result-box h5{
+        height: 8vh;
+    }    
 }
