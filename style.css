@@ -57,6 +57,15 @@ input {
     color: white;
 }
 
+.card-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    color: #00eaff;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /* BUTTON */
 button {
     width: 100%;
