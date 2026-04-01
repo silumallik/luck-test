@@ -220,7 +220,7 @@ button:hover {
         height: 40vh; 
     }
     .result-box h5{
-        height: 18vh;
+        height: 8vh;
     }
 }
 
@@ -229,6 +229,6 @@ button:hover {
         height: 50vh;
     }
     .result-box h5{
-        height: 18vh;
+        height: 8vh;
     }    
 }
