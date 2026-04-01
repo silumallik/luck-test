@@ -359,6 +359,38 @@ document.querySelector("#checkresult").addEventListener("click", () => {
     Game.result();
 });
 
+// result btn select
+const resultBtn = document.querySelector("#checkresult");
+
+// every 30sec can use result btn
+resultBtn.addEventListener("click", () => {
+
+    if (resultBtn.disabled) return;
+
+    // 👉 result function call
+    Game.result();
+
+    resultBtn.disabled = true;
+    resultBtn.textContent = "Waiting 30s...";
+
+    let timeLeft = 30;
+
+    let timer = setInterval(() => {
+        timeLeft--;
+
+        resultBtn.textContent = `Waiting ${timeLeft}s...`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+
+            resultBtn.disabled = false;
+            resultBtn.textContent = "Check Result";
+        }
+
+    }, 1000);
+
+});
+
 // RESTART BUTTON
 document.querySelector("#restart").addEventListener("click", () => {
 
