@@ -32,6 +32,16 @@ function numberanimation() {
     );
 }
 
+//Waiting Animation
+function startWaitingAnimation(span) {
+    let dots = 0;
+
+    span.interval = setInterval(() => {
+        dots = (dots + 1) % 4; // 0 → 3
+        span.textContent = "Waiting" + ".".repeat(dots);
+    }, 500);
+}
+
 shownumber()
 numberanimation()
 
@@ -79,6 +89,10 @@ class game {
 
         // STEP 3 — NAYA RESULT SHOW (CARDS ME)
         this.riskusers.forEach((val) => {
+
+            // ❗ STOP WAITING ANIMATION
+            clearInterval(val.resultSpan.interval);
+            
             if (val.number === this.currentRandomNumber) {
                 val.resultSpan.textContent =
                     `Win ${Number(val.balance) * 4}`;
@@ -161,6 +175,9 @@ function createuserbox(inputname, inputamount) {
     let resultspan = document.createElement("span");
     resultspan.textContent = "Waiting...";
     result.append(resultspan);
+
+    //Add Waiting Animation
+    startWaitingAnimation(resultspan);
 
     resultcard.append(Name, select, amount, result);
 
