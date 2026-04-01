@@ -95,7 +95,7 @@ button:hover {
     width: 680px;
     font-size: larger;
     /* max-height: 400px; */
-    height: 50vh;
+    height: 75vh;
     overflow: scroll;
     /* overflow-y: auto; */
     border-radius: 15px;
