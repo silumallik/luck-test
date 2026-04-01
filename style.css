@@ -224,11 +224,11 @@ button:hover {
     }
 }
 
-@media (max-width: 1025px) {
+@media (max-width: 1024px) {
     .result-box {
         height: 50vh;
     }
     .result-box h5{
-        height: 10vh;
+        height: 8vh;
     }    
 }
