@@ -214,3 +214,9 @@ button:hover {
     border-radius: 10px;
     margin: 10px 0;
 }
+
+@media (max-width: 600px) {
+    .result-box {
+        height: 40vh; 
+    }
+}
