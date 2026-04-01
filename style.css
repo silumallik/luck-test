@@ -85,6 +85,20 @@ button:hover {
     box-shadow: 0 0 15px #00c6ff;
 }
 
+#checkresult:disabled {
+    background: gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+#checkresult {
+    transition: all 0.3s ease;
+}
+
+#checkresult:active {
+    transform: scale(0.95);
+}
+
 /* NUMBER BOX (MAIN HERO) */
 .numberbox {
     width: 250px;
