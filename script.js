@@ -69,6 +69,7 @@ class game {
     }
 
     result() {
+        window.speechSynthesis.cancel(); // stop previous voice
         if (this.currentRandomNumber === null) {
             alert("Click Start Game First!");
             return;
@@ -85,22 +86,69 @@ class game {
         document.querySelector(".result-box").innerHTML = "";
 
         // Convert Set to Array for Result Board
-        let playersArray = Array.from(this.riskusers);
+        // let playersArray = Array.from(this.riskusers);
 
         // STEP 3 — NAYA RESULT SHOW (CARDS ME)
-        this.riskusers.forEach((val) => {
+        // this.riskusers.forEach((val) => {
 
-            // ❗ STOP WAITING ANIMATION
+        //     // ❗ STOP WAITING ANIMATION
+        //     // clearInterval(val.resultSpan.interval);
+
+        //     if (val.number === this.currentRandomNumber) {
+        //         val.resultSpan.textContent =
+        //             `Win ${Number(val.balance) * 4}`;
+        //     } else {
+        //         val.resultSpan.textContent =
+        //             `Lost ${val.balance}`;
+        //     }
+
+        // })
+
+
+        let commentary = [];
+
+        commentary.push({
+            // text: `🎯 And the lucky number is... ${this.currentRandomNumber}`,
+            text: `And the lucky number is ${this.currentRandomNumber}`,
+            rate: 0.9,
+            pitch: 1.0,
+            delay: 800
+        });
+
+        // players array
+        let playersArray = Array.from(this.riskusers);
+
+        playersArray.forEach((val) => {
+
             clearInterval(val.resultSpan.interval);
-            
+
             if (val.number === this.currentRandomNumber) {
-                val.resultSpan.textContent =
-                    `Win ${Number(val.balance) * 4}`;
+                let winAmount = Number(val.balance) * 4;
+
+                val.resultSpan.textContent = `Win ${winAmount}`;
+
+                commentary.push({
+                    text: `Wow! ${val.name} wins ${winAmount} rupees!`,
+                    rate: 1.0,
+                    pitch: 1.2,
+                    delay: 700
+                });
+
             } else {
-                val.resultSpan.textContent =
-                    `Lost ${val.balance}`;
+                val.resultSpan.textContent = `Lost ${val.balance}`;
+
+                commentary.push({
+                    text: `${val.name} loses ${val.balance} rupees`,
+                    rate: 0.95,
+                    pitch: 0.9,
+                    delay: 500
+                });
             }
         });
+
+        // ▶️ Play full sequence
+        speakSequence(commentary);
+
 
         // STEP 4 — NAYA RESULT BOARD ENTRY
         addToResultBoard(this.currentRandomNumber, playersArray);
@@ -319,7 +367,7 @@ createuser.addEventListener("click", () => {
 
 // PLAY BUTTON — adds/updates MULTIPLE users replase kiya hey Update Number mey
 document.querySelector("#updatenumber").addEventListener("click", () => {
-    
+    // alert(`Selected Number Of All Users Has Been Updated.`)
     let allCards = document.querySelectorAll(".result-card");
 
 
@@ -353,14 +401,9 @@ document.querySelector("#updatenumber").addEventListener("click", () => {
     });
 });
 
-// START GAME BUTTON ko replase kiya hey Check Result
-document.querySelector("#checkresult").addEventListener("click", () => {
-    Game.startRound();
-    Game.result();
-});
-
 // result btn select
 const resultBtn = document.querySelector("#checkresult");
+const restartBtn = document.querySelector("#restart");
 
 // every 30sec can use result btn
 resultBtn.addEventListener("click", () => {
@@ -368,10 +411,13 @@ resultBtn.addEventListener("click", () => {
     if (resultBtn.disabled) return;
 
     // 👉 result function call
+    Game.startRound();
     Game.result();
 
     resultBtn.disabled = true;
+    restartBtn.disabled = true;
     resultBtn.textContent = "Waiting 30s...";
+    restartBtn.textContent = "Waiting 30s...";
 
     let timeLeft = 30;
 
@@ -379,12 +425,15 @@ resultBtn.addEventListener("click", () => {
         timeLeft--;
 
         resultBtn.textContent = `Waiting ${timeLeft}s...`;
+        restartBtn.textContent = `Waiting ${timeLeft}s...`;
 
         if (timeLeft <= 0) {
             clearInterval(timer);
 
             resultBtn.disabled = false;
+            restartBtn.disabled = false;
             resultBtn.textContent = "Check Result";
+            restartBtn.textContent = "Restart";
         }
 
     }, 1000);
@@ -392,7 +441,9 @@ resultBtn.addEventListener("click", () => {
 });
 
 // RESTART BUTTON
-document.querySelector("#restart").addEventListener("click", () => {
+restartBtn.addEventListener("click", () => {
+
+    if (restartBtn.disabled) return;
 
     Game.resetGame();
 
@@ -424,7 +475,7 @@ function addToResultBoard(randomNumber, players) {
 
     let lines = []; // Store lines for stagger animation
 
-    let count = 1;
+    let count = 1
 
     players.forEach(p => {
         let line = document.createElement("p");
@@ -445,7 +496,7 @@ function addToResultBoard(randomNumber, players) {
         lines.push(line); // collect elements
 
         numberanimation()
-        count++;
+        count++
 
     });
     board.append(h5)
@@ -486,5 +537,52 @@ gsap.from("#gamedescription p", {
         start: "top 85%",
     },
 })
+
+// Voice Commentary Function
+function speakSequence(commentary) {
+    let index = 0;
+
+    // Get available voices
+    let voices = window.speechSynthesis.getVoices();
+    let selectedVoice = voices.find(voice => voice.lang.includes('hi') && voice.name.includes('Male')) || 
+                       voices.find(voice => voice.lang.includes('hi')) || 
+                       voices.find(voice => voice.lang.includes('en') && voice.name.includes('Female')) || 
+                       voices.find(voice => voice.lang.includes('en')) || 
+                       voices[0]; // Fallback to first voice
+
+    function speakNext() {
+        if (index >= commentary.length) return;
+
+        const item = commentary[index];
+        const utterance = new SpeechSynthesisUtterance(item.text);
+
+        utterance.rate = item.rate || 1;
+        utterance.pitch = item.pitch || 1;
+        utterance.volume = 1; // Full volume
+        utterance.voice = selectedVoice;
+
+        utterance.onend = () => {
+            index++;
+            if (index < commentary.length) {
+                setTimeout(speakNext, commentary[index].delay || 500);
+            }
+        };
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // If voices not loaded yet, wait
+    if (voices.length === 0) {
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = window.speechSynthesis.getVoices();
+            selectedVoice = voices.find(voice => voice.lang.includes('en') && voice.name.includes('Female')) || 
+                           voices.find(voice => voice.lang.includes('en')) || 
+                           voices[0];
+            speakNext();
+        };
+    } else {
+        speakNext();
+    }
+}
 
 
