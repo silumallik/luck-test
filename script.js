@@ -123,7 +123,7 @@ class game {
             clearInterval(val.resultSpan.interval);
 
             if (val.number === this.currentRandomNumber) {
-                let winAmount = Number(val.balance) * 4;
+                let winAmount = Number(val.balance) * 8;
 
                 val.resultSpan.textContent = `Win ${winAmount}`;
 
