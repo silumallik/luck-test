@@ -482,7 +482,7 @@ function addToResultBoard(randomNumber, players) {
 
         if (p.number === randomNumber) {
             line.textContent =
-                `${count})  ✅ ${p.name} WON ${Number(p.balance) * 4} Rs.`;
+                `${count})  ✅ ${p.name} WON ${Number(p.balance) * 8} Rs.`;
             line.style.color = "white"
             line.style.opacity = ".8"
             line.style.fontWeight = "bold"
